@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import SimpleModal from './components/SimpleModal';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import {
   Box,
   Card,
@@ -35,23 +35,26 @@ const Results = ({ className, users, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>
+                <TableCell align="center">
                   Users
+                </TableCell>
+                <TableCell align="center">
+                  Visualizar
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {users.slice(0, 9).map((user) => (
                 <TableRow hover key={user.id}>
-                  <TableCell>
-                    <Box alignItems="center" display="flex">
+                  <TableCell align="center">
+                    <Box>
                       <Typography color="textPrimary" variant="body1">
                         {user.name}
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell align="right">
-                    <SimpleModal />
+                  <TableCell align="center">
+                    <VisibilityIcon />
                   </TableCell>
                 </TableRow>
               ))}

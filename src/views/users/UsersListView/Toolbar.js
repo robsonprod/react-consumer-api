@@ -12,37 +12,28 @@ import {
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  importButton: {
-    marginRight: theme.spacing(1)
-  },
-  exportButton: {
-    marginRight: theme.spacing(1)
-  }
+const useStyles = makeStyles(() => ({
+  root: {}
 }));
 
 const Toolbar = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <div
+    <div 
       className={clsx(classes.root, className)}
       {...rest}
     >
       <Box mt={3}>
         <Card>
           <CardContent>
-            <Box maxWidth="100%">
+            <Box>
               <TextField
                 fullWidth
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <SvgIcon
-                        fontSize="small"
-                        color="action"
-                      >
+                      <SvgIcon fontSize="small" color="action">
                         <SearchIcon />
                       </SvgIcon>
                     </InputAdornment>
