@@ -1,32 +1,49 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
-import DashboardLayout from 'src/layouts/DashboardLayout';
-import MainLayout from 'src/layouts/MainLayout';
-import UsersListView from 'src/views/users/UsersListView';
-import DashboardView from 'src/views/reports/DashboardView';
-import ProductListView from 'src/views/product/ProductListView';
-import AccountView from 'src/views/account/AccountView';
+import { Switch, Redirect } from 'react-router-dom';
 
-const routes = [
-  {
-    path: 'app',
-    element: <DashboardLayout />,
-    children: [
-      { path: 'account', element: <AccountView /> },
-      { path: 'users', element: <UsersListView /> },
-      { path: 'dashboard', element: <DashboardView /> },
-      { path: 'products', element: <ProductListView /> },
-      { path: '*', element: <Navigate to="/404" /> }
-    ]
-  },
-  {
-    path: '/',
-    element: <MainLayout />,
-    children: [
-      { path: '/', element: <Navigate to="/app/users" /> },
-      { path: '*', element: <Navigate to="/404" /> }
-    ]
-  }
-];
+import { RouteWithLayout } from './components';
+import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 
-export default routes;
+import {
+  Dashboard as DashboardView,
+  UsersList as UsersListView,
+  TarefaList as TarefaListView,
+  Typography as TypographyView,
+  Icons as IconsView,
+  Account as AccountView,
+  Settings as SettingsView,
+  NotFound as NotFoundView
+} from './views';
+
+const Routes = () => {
+  return (
+    <Switch>
+      <Redirect
+        exact
+        from="/"
+        to="/dashboard"
+      />
+      <RouteWithLayout
+        component={DashboardView}
+        exact
+        layout={MainLayout}
+        path="/dashboard"
+      />
+      <RouteWithLayout
+        component={TarefaListView}
+        exact
+        layout={MainLayout}
+        path="/tarefas"
+      />
+      <RouteWithLayout
+        component={UsersListView}
+        exact
+        layout={MainLayout}
+        path="/users"
+      />
+      <Redirect to="/not-found" />
+    </Switch>
+  );
+};
+
+export default Routes;
