@@ -4,8 +4,9 @@ import { IconButton, Grid, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { axios } from 'axios';
 
 import { UsersToolbar, UserCard } from './components';
 
@@ -24,9 +25,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+axios.get("https://api.github.com/users")
+.then(response => {
+  console.log(response.data);
+}).catch(erro => {
+  console.log(erro);
+});
+
 const UsersList = () => {
   const classes = useStyles();
 
+  
   const [users] = useState([]);
 
   return (
@@ -63,15 +72,4 @@ const UsersList = () => {
   );
 };
 
-const mapStateToProps = state => ({
-  users: state.users.users,
-  mensagem: state.mensagens.mensagem,
-  openDialog: state.mensagens.mostrarMensagem
-})
-
-const mapDispatchToProps = dispatch => 
-bindActionCreators({
-
-}, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersList);
+export default UsersList;
